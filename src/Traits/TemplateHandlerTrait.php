@@ -1,43 +1,61 @@
 <?php namespace Webtack\GenericController\Traits;
 
 
+use ErrorException;
+use Illuminate\Support\Facades\View;
+
 trait TemplateHandlerTrait {
 	
-	public $templateName = '';
+	protected $templateName = Null;
+	protected $templatePrefix = null;
+	protected $templateSuffix = null;
 	
-	private function getTemplateName() {
+	/**
+	 * @param array $context
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	protected function renderToResponse(array $context) {
+		return view($this->getTemplateName(), $context);
+	}	
+	
+	/**
+	 * Get name from template
+	 * 
+	 * @return string
+	 */
+	
+	public function getTemplateName() {
+		$templateName = $this->templateName;
 		
-		if($this->templateName === '') {
-			$className = $this->getClassName();
-			$className = $this->replaceTemplateName($className);
-			return $className;
-		}
-		else {
-			return $this->templateName;
-		}		
-	}
-	
-	public function renderToResponse($context) {		
-		$templateName = $this->getTemplateName();		
-		return view($templateName, $context);
-	}
-	
-	private function getClassName() {
-		$path = get_class($this);
-		$path = explode("\\", $path);
-		$path = array_pop($path);	
+		if($this->templatePrefix)
+			$templateName = $this->templatePrefix . $templateName;
 		
-		return $path;
+		if($this->templateSuffix)
+			$templateName .= $this->templateSuffix;
+		
+		return $templateName;
 	}
 	
-	private function replaceTemplateName(string $className) {
-		$className = str_replace("Controller", "", $className);
-		$className = preg_replace("/(?=[A-Z])/", "-", $className);
-		$className = str_replace("_", "-", $className);
-		$className = str_replace("--", "-", $className);
-		$className = mb_strtolower($className);
-		$className = substr($className, 1);
-		
-		return $className;
+	/**
+	 * Optional
+	 * Init $templatePrefix property
+	 * 
+	 * @return null | string
+	 */
+	protected function templatePrefix() {
+		return null;
 	}
+	
+	/**
+	 * Optional
+	 * Init $templateSuffix property
+	 *
+	 * @return null | string
+	 */
+	protected function templateSuffix() {
+		return null;
+	}
+	
+	
 }
