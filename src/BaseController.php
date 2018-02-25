@@ -1,19 +1,18 @@
 <?php namespace Webtack\GenericController;
 
-use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Routing\Controller as BaseRoutingController;
 use Illuminate\Http\Request;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
-use Webtack\GenericController\Traits\RequestParamsHandler;
 
 /**
- * Class GenericBaseController
+ * Class BaseController
  * --------------------------------------------------
  * Intentionally simple parent class for all views.
  * Only implements dispatch-by-method and simple sanity checking.
  *
  * @package Webtack\GenericView
  */
-class GenericBaseController extends BaseController {
+abstract class BaseController extends BaseRoutingController {
 	
 	/**
 	 * Allowed methods
@@ -33,6 +32,11 @@ class GenericBaseController extends BaseController {
 	protected $request;
 	
 	/**
+	 * @var array
+	 */
+	protected $requestParameters = [];
+	
+	/**
 	 * Try to dispatch to the right method; if a method doesn't exist,
 	 * defer o the error handler. Also defer to the error handler if the
 	 * request method isn't on the approved list.
@@ -43,12 +47,15 @@ class GenericBaseController extends BaseController {
 	 * @internal param array $parameters
 	 *
 	 */
-	public function dispatch(Request $request) {
+	public function dispatch($request) {
 		$method_name = $request->method();
 		
 		if (in_array($method_name, $this->httpMethodNames)) {
+			
 			$this->request = $request;
-			return $this->callAction($method_name, $this->getRequestParameters($request));
+			$this->requestParameters = $this->getRequestParameters($request);
+			
+			return $this->callAction($method_name, $this->requestParameters);
 		}
 		else {
 			$this->httpMethodNotAllowed($method_name);
@@ -63,7 +70,17 @@ class GenericBaseController extends BaseController {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function asView(Request $request) {
+		$this->initProperties();
 		return $this->dispatch($request);
+	}
+	
+	/**
+	 * Initialisation properties the class
+	 * 
+	 * @return void
+	 */
+	protected function initProperties() {
+		//TODO init properties
 	}
 	
 	/**
@@ -86,7 +103,7 @@ class GenericBaseController extends BaseController {
 	 *
 	 * @return array
 	 */
-	protected function getRequestParameters(Request $request) {
+	final protected function getRequestParameters($request) {
 		return $request->route()->parameters;
 	}
 	
