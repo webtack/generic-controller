@@ -22,9 +22,17 @@ trait ModifierNameTrait {
 				$string = str_replace("_", $delimiter, $string);
 				$string = str_replace($delimiter . $delimiter, $delimiter, $string);
 				$string = substr($string, 1);
-				$string = mb_strtolower($string);
+				$string = $this->toLowerName($string);
 				
 				return $string;
+		}
+		
+		protected function toLowerName(string $string): string {
+				return mb_strtolower($string);
+		}
+		
+		protected function lcFirstName(string $string):string {
+				return lcfirst($string);
 		}
 		
 		protected function joinPrefix(string $string, $prefix) {
