@@ -1,14 +1,16 @@
 <?php namespace Webtack\GenericController;
 
-use Webtack\GenericController\Traits\ContextHandlerTrait;
-use Webtack\GenericController\Traits\ListHandlerTrait;
-use Webtack\GenericController\Traits\TemplateHandlerTrait;
+use Webtack\GenericController\Traits\MultipleObjectContextTrait;
+use Webtack\GenericController\Traits\MultipleObjectTemplateTrait;
 
-class ListController extends BaseController {	
+abstract class ListController extends BaseController {	
 	
-	use TemplateHandlerTrait;
-	use ContextHandlerTrait;
-	use ListHandlerTrait;
-
+	use MultipleObjectContextTrait;
+	use MultipleObjectTemplateTrait;
 	
+	public function get() {
+			
+	}
+		
+		
 }

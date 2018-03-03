@@ -1,14 +1,14 @@
 <?php namespace Webtack\GenericController\Traits;
 
 
-trait ContextHandlerTrait {
+trait ContextTrait {
 	
 	/**
 	 * @param Illuminate\Http\Request
 	 *
 	 * @return array
 	 */
-	public function getContextData($request) {		
+	protected function getContextData($request) {		
 		$context = $request->route()->parameters;	
 		return $context;
 	}
