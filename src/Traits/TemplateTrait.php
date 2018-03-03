@@ -2,9 +2,7 @@
 
 
 trait TemplateTrait {
-		
-		use BaseTrait;
-		use ModifierNameTrait;
+
 		
 		/**
 		 * @param array $context

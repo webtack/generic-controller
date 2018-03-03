@@ -1,6 +1,6 @@
 <?php namespace Webtack\GenericController;
 
-use Webtack\GenericController\Traits\ContextTrait;
+use Webtack\GenericController\Traits\BaseTrait;
 use Webtack\GenericController\Traits\TemplateTrait;
 
 
@@ -11,18 +11,19 @@ use Webtack\GenericController\Traits\TemplateTrait;
  * @package Webtack\GenericController
  */
 abstract class TemplateController extends BaseController {
-		
-		use TemplateTrait;
-		
-		
-		public function get() {
-				return $this->renderToResponse();
-		}
-		
-		/**
-		 * Init templateName property from view
-		 *
-		 * @return string
-		 */
-		abstract function templateName();
+	
+	use BaseTrait;
+	use TemplateTrait;
+	
+	
+	public function get() {
+		return $this->renderToResponse();
+	}
+	
+	/**
+	 * Init templateName property from view
+	 *
+	 * @return string
+	 */
+	abstract function templateName();
 }
