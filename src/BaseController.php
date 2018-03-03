@@ -58,18 +58,8 @@ abstract class BaseController extends BaseRoutingController {
 		 * @return \Illuminate\Http\Response
 		 */
 		public function asView(Request $request) {
-				$this->initProperties();
 				
 				return $this->dispatch($request);
-		}
-		
-		/**
-		 * Initialisation properties the class
-		 *
-		 * @return void
-		 */
-		protected function initProperties() {
-				//TODO init properties
 		}
 		
 		/**

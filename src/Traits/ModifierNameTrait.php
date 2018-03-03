@@ -1,7 +1,7 @@
 <?php namespace Webtack\GenericController\Traits;
 
 
-trait ModifierName {
+trait ModifierNameTrait {
 		
 		protected function getClassName($object): string {
 				$path = get_class($object);
