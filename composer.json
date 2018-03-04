@@ -2,6 +2,8 @@
     "name": "webtack/generic-controller",
     "license": "MIT",
     "type": "library",
+    "description": "Generic Controllers includes a set of generic representations that are ideally suited for solving a number of routine tasks.",
+    "homepage": "https://github.com/webtack/generic-controller",
     "keywords": ["laravel", "controller", "generic", "webtack"],
     "authors": [
         {
