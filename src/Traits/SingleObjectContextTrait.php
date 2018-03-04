@@ -8,12 +8,14 @@ trait SingleObjectContextTrait {
 	protected function getContextData($request, $column = []) {
 		$model = $this->model();
 		
-		if (empty($column))
+		if (empty($column)) {
 			$data = $model->find($request->id);
-		else 
-			$data = $model->where($column)->first();		
+		}
+		else {
+			$data = $model->where($column)->first();
+		}
 		
-		return [$this->contextObjectName() => $data];		
+		return [$this->contextObjectName() => $data];
 	}
 	
 }
