@@ -1,28 +1,31 @@
 <?php namespace Webtack\GenericController;
 
-use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Routing\Controller as BaseRoutingController;
 use Illuminate\Http\Request;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 
 /**
- * Class GenericBaseController
+ * Class BaseController
  * --------------------------------------------------
  * Intentionally simple parent class for all views.
  * Only implements dispatch-by-method and simple sanity checking.
  *
  * @package Webtack\GenericView
  */
-class GenericBaseController extends BaseController {
+abstract class BaseController extends BaseRoutingController {
+	
 	/**
 	 * Allowed methods
+	 *
 	 * @var array
 	 */
 	protected $httpMethodNames = [
-			'GET',
-			'POST',
-			'PUT',
-			'PATCH',
-			'DELETE',
+		'GET',
+		'POST',
+		'PUT',
+		'PATCH',
+		'DELETE',
+		'OPTIONS',
 	];
 	
 	/**
@@ -32,19 +35,19 @@ class GenericBaseController extends BaseController {
 	 *
 	 * @param \Illuminate\Http\Request $request
 	 *
-	 * @param array                    $parameters
-	 *
 	 * @return mixed
+	 * @internal param array $parameters
+	 *
 	 */
-	public function dispatch(Request $request, array $parameters) {
-		$method_name = $request->method();
+	public function dispatch($request) {
+		$method_name = $request->method();		
 		
 		if (in_array($method_name, $this->httpMethodNames)) {
 			
-			array_unshift($parameters, $request);			
-			return $this->callAction($method_name, $parameters);
+			return $this->callAction($method_name, $this->getRequestParameters($request));
 		}
 		else {
+			
 			$this->httpMethodNotAllowed($method_name);
 		}
 	}
@@ -57,17 +60,35 @@ class GenericBaseController extends BaseController {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function asView(Request $request) {
-		$parameters = $request->route()->parameters;
-		$parameters = array_values($parameters);
-		return $this->dispatch($request, $parameters);
+		
+		return $this->dispatch($request);
 	}
 	
+	/**
+	 * If the view was called with an unsupported HTTP method, this method will be called
+	 *
+	 * @param string $method_name
+	 */
 	protected function httpMethodNotAllowed(string $method_name) {
 		$class_name = __CLASS__;
-		
 		$message = "Method: [{$method_name}] Not Allowed in property " . "[\$httpMethodNames] on class [{$class_name}]";
 		
 		throw new MethodNotAllowedException($this->httpMethodNames, $message);
+	}
+	
+	/**
+	 * Passes parameters to the called method.
+	 * the rest are defined in your route
+	 *
+	 * @param \Illuminate\Http\Request $request
+	 *
+	 * @return array
+	 */
+	final protected function getRequestParameters($request) {
+		$parameters = $request->route()->parameters;
+		array_unshift($parameters, $request);
+		
+		return $parameters;
 	}
 	
 }

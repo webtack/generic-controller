@@ -3,7 +3,7 @@
     "license": "MIT",
     "type": "library",
     "version": "dev-master",
-    "keywords": ["laravel", "controller"],
+    "keywords": ["laravel", "controller", "generic", "webtack"],
     "authors": [
         {
             "name": "Ruslan Bilyshko",
