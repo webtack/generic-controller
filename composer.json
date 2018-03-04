@@ -2,7 +2,6 @@
     "name": "webtack/generic-controller",
     "license": "MIT",
     "type": "library",
-    "version": "dev-master",
     "keywords": ["laravel", "controller", "generic", "webtack"],
     "authors": [
         {
