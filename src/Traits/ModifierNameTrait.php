@@ -45,7 +45,7 @@ trait ModifierNameTrait {
 				}
 		}
 		
-		protected function joinSuffix(string $name, $suffix) {
+		protected function joinSuffix(string $string, $suffix) {
 				
 				if (!empty($suffix)) {
 						return $name . $suffix;
