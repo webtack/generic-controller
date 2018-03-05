@@ -93,10 +93,10 @@ protected function getContextData($request, $column = []) {
 Or override get method
 
 ```php
-	public function get($request, $name) {
-		$context = $this->getContextData($request, ['name' => $name]);
-		return $this->renderToResponse($context);
-	}
+public function get($request, $name) {
+	$context = $this->getContextData($request, ['name' => $name]);
+	return $this->renderToResponse($context);
+}
 ```
 Supported methods correspond to request types.
 
