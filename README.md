@@ -76,7 +76,7 @@ Route::get(/article/{id}', ['uses' => 'ArticlePageController@asView']);
     protected function getContextData($request, $column = []){}
 ```
 The method responsible for obtaining data from the database. <br>
-By default, there will be an attempt to get the model by the parameter ** id ** from the route
+By default, there will be an attempt to get the model by the parameter **id** from the route
 
 But you can override this behavior by overloading this method. It must return an array with a context name key and an object of the model.
 
@@ -93,11 +93,10 @@ protected function getContextData($request, $column = []) {
 Or override get method
 
 ```php
-
-		public function get($request, $name) {
-				$context = $this->getContextData($request, ['name' => $name]);
-				return $this->renderToResponse($context);
-		}
+	public function get($request, $name) {
+		$context = $this->getContextData($request, ['name' => $name]);
+		return $this->renderToResponse($context);
+	}
 ```
 Supported methods correspond to request types.
 
@@ -116,7 +115,7 @@ The following parameters can be those that you defined in your routes.
 
 ### View Name
 
-By default, DetailController will search for a view with the name of the "art-page-class" class new, and you will also be able to override it in the **templateName** method
+By default, DetailController will search for a view with the name of the "article-page" class new, and you will also be able to override it in the **templateName** method
 
 Note the auxiliary methods **templatePrefix** and **templateSuffix**. <br>
 If you define them, the data will be appended to the name of the view returned by the method **templateName**
