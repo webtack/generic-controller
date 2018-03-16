@@ -1,8 +1,12 @@
 <?php namespace Webtack\GenericController;
 
-use Illuminate\Routing\Controller as BaseRoutingController;
 use Illuminate\Http\Request;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
+
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Routing\Controller as BaseRoutingController;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 /**
  * Class BaseController
@@ -13,6 +17,8 @@ use Symfony\Component\Routing\Exception\MethodNotAllowedException;
  * @package Webtack\GenericView
  */
 abstract class BaseController extends BaseRoutingController {
+	
+	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 	
 	/**
 	 * Allowed methods
