@@ -55,7 +55,7 @@ class ArticlePageController extends DetailController {
 	/**
 	 * Init Model from Query
 	 *
-	 * @return \Illuminate\Database\Eloquent\Model
+	 * @return \Illuminate\Database\Config\Model
 	 */
 	function model() {
 		return new Article();
@@ -148,7 +148,7 @@ use Webtack\GenericController\ListController;
 class BlogPageController extends ListController {
 	
 	/**
-	 * @return \Illuminate\Database\Eloquent\Model
+	 * @return \Illuminate\Database\Config\Model
 	 */
 	public function model() {
 		return new Blog();

@@ -48,10 +48,10 @@ trait ModifierNameTrait {
 		protected function joinSuffix(string $string, $suffix) {
 				
 				if (!empty($suffix)) {
-						return $name . $suffix;
+						return $string . $suffix;
 				}
 				else {
-						return $name;
+						return $string;
 				}
 		}
 }

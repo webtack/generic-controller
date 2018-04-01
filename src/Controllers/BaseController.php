@@ -71,7 +71,7 @@ abstract class BaseController extends BaseRoutingController {
 	}
 	
 	/**
-	 * If the view was called with an unsupported HTTP method, this method will be called
+	 * If the views was called with an unsupported HTTP method, this method will be called
 	 *
 	 * @param string $method_name
 	 */

@@ -21,7 +21,7 @@ abstract class TemplateController extends BaseController {
 	}
 	
 	/**
-	 * Init templateName property from view
+	 * Init templateName property from views
 	 *
 	 * @return string
 	 */

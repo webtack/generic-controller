@@ -20,7 +20,7 @@ trait ContextTrait {
 	abstract function model();
 	
 	/**
-	 * Init key from context in view
+	 * Init key from context in views
 	 * by default returns the name of the model's slice
 	 *
 	 * @return string
