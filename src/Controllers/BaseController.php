@@ -45,8 +45,8 @@ abstract class BaseController extends BaseRoutingController {
 	 * @internal param array $parameters
 	 *
 	 */
-	public function dispatch($request) {
-		$method_name = $request->method();		
+	public function dispatcher($request) {
+		$method_name = $request->method();
 		
 		if (in_array($method_name, $this->httpMethodNames)) {
 			
@@ -67,7 +67,7 @@ abstract class BaseController extends BaseRoutingController {
 	 */
 	public function asView(Request $request) {
 		
-		return $this->dispatch($request);
+		return $this->dispatcher($request);
 	}
 	
 	/**
